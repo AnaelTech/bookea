@@ -8,7 +8,7 @@ import { AuthResponse } from '../shared/model/authResponse';
 @Injectable({
   providedIn: 'root',
 })
-export class Auth {
+export class AuthService {
   private readonly http = inject(HttpClient);
 
   private readonly apiUrl = environment.apiUrl + 'auth';

@@ -5,7 +5,7 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { Auth } from '../../services/auth';
+import { AuthService } from '../../services/auth';
 import {
   FormControl,
   FormGroup,
@@ -23,7 +23,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './login.css',
 })
 export class Login {
-  private authService: Auth = inject(Auth);
+  private authService: AuthService = inject(AuthService);
 
   private router: Router = inject(Router);
 

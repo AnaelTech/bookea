@@ -12,7 +12,7 @@ import { PaginatedResponse } from '../shared/model/paginatedResponse';
 @Injectable({
   providedIn: 'root',
 })
-export class Client {
+export class ClientService {
   private readonly http: HttpClient = inject(HttpClient);
   private readonly apiUrl: string = environment.apiUrl + 'clients';
 

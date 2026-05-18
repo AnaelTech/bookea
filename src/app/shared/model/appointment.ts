@@ -1,5 +1,5 @@
-import { User } from '../../services/user';
 import { Client } from './client';
+import { User } from './user';
 
 export interface Appointment {
   id: number;
