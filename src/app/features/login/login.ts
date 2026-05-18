@@ -48,7 +48,7 @@ export class Login {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: () => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
           },
           error: () => {
             this.errorMessage.set('Invalid email or password');
