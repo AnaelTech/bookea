@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from './sidebar/sidebar';
 
@@ -8,4 +8,14 @@ import { Sidebar } from './sidebar/sidebar';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {}
+export class Dashboard {
+  mobileSidebarOpen = signal(false);
+
+  openMobileSidebar() {
+    this.mobileSidebarOpen.set(true);
+  }
+
+  closeMobileSidebar() {
+    this.mobileSidebarOpen.set(false);
+  }
+}

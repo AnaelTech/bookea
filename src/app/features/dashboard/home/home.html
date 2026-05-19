@@ -1,0 +1,158 @@
+<div class="px-4 py-5 sm:px-6 sm:py-6 max-w-5xl mx-auto text-gray-200">
+  <!-- Header -->
+  <div
+    class="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start mb-6 sm:mb-8"
+  >
+    <div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-600 mb-1">
+        Bonjour, {{ userName }} 👋
+      </h1>
+      <p class="text-gray-400 text-sm">Voici votre journée</p>
+    </div>
+    <div
+      class="self-start flex items-center gap-2 bg-white border border-neutral-700 rounded-lg px-3 py-2 text-xs sm:text-sm text-gray-600 whitespace-nowrap"
+    >
+      <span>📅</span>
+      <span>{{ formatDate(today) | titlecase }}</span>
+    </div>
+  </div>
+
+  <!-- Stats : 2 cols mobile, 4 cols desktop -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-10">
+    <div class="bg-white border border-neutral-800 rounded-xl p-4 sm:p-5">
+      <div class="text-xs text-gray-500 uppercase tracking-wide mb-2">
+        RDV aujourd'hui
+      </div>
+      <div
+        class="text-3xl sm:text-4xl font-bold text-gray-600 leading-none mb-1"
+      >
+        {{ stats.rdv.value }}
+      </div>
+      <div class="text-xs text-gray-600">{{ stats.rdv.sub }}</div>
+    </div>
+    <div class="bg-white border border-neutral-800 rounded-xl p-4 sm:p-5">
+      <div class="text-xs text-gray-500 uppercase tracking-wide mb-2">
+        CA du jour
+      </div>
+      <div
+        class="text-3xl sm:text-4xl font-bold text-gray-600 leading-none mb-1"
+      >
+        {{ stats.ca.value }}
+      </div>
+      <div class="text-xs text-gray-600">{{ stats.ca.sub }}</div>
+    </div>
+    <div class="bg-white border border-neutral-800 rounded-xl p-4 sm:p-5">
+      <div class="text-xs text-gray-500 uppercase tracking-wide mb-2">
+        No-shows
+      </div>
+      <div
+        class="text-3xl sm:text-4xl font-bold text-red-400 leading-none mb-1"
+      >
+        {{ stats.noShows.value }}
+      </div>
+      <div class="text-xs text-gray-600">{{ stats.noShows.sub }}</div>
+    </div>
+    <div class="bg-white border border-neutral-800 rounded-xl p-4 sm:p-5">
+      <div class="text-xs text-gray-500 uppercase tracking-wide mb-2">
+        Taux de remplissage
+      </div>
+      <div
+        class="text-3xl sm:text-4xl font-bold text-green-400 leading-none mb-1"
+      >
+        {{ stats.fillRate.value }}
+      </div>
+      <div class="text-xs text-gray-600">{{ stats.fillRate.sub }}</div>
+    </div>
+  </div>
+
+  <!-- Prochains RDV -->
+  <div class="flex justify-between items-center mb-3">
+    <span class="text-sm sm:text-base font-semibold text-gray-300"
+      >Prochains rendez-vous</span
+    >
+    <a class="text-xs sm:text-sm text-blue-400 hover:underline" href="#"
+      >Voir tous →</a
+    >
+  </div>
+
+  <div class="flex flex-col gap-2 mb-8 sm:mb-10">
+    @for (appt of appointments; track appt.clientName) {
+      <div
+        class="flex items-center gap-3 sm:gap-4 bg-white border border-neutral-800 rounded-xl px-4 sm:px-5 py-3 sm:py-4"
+      >
+        <!-- Heure -->
+        <div
+          class="text-xs sm:text-sm font-semibold text-gray-300 w-12 sm:w-14 shrink-0"
+        >
+          {{ appt.time }}
+        </div>
+
+        <!-- Avatar -->
+        <div
+          class="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs font-bold text-neutral-900 shrink-0"
+          [style.background]="appt.initialsColor"
+        >
+          {{ appt.initials }}
+        </div>
+
+        <!-- Infos client -->
+        <div class="flex-1 min-w-0">
+          <div class="font-semibold text-gray-600 text-sm truncate">
+            {{ appt.clientName }}
+          </div>
+          <div class="text-xs text-gray-500 mt-0.5 truncate">
+            {{ appt.service }} · {{ appt.duration }}
+          </div>
+        </div>
+
+        <!-- Staff : masqué sur mobile très petit -->
+        <div
+          class="hidden xs:flex items-center gap-1.5 text-gray-500 text-xs sm:text-sm shrink-0"
+        >
+          <span class="opacity-50">☐</span>
+          <span>{{ appt.staff }}</span>
+        </div>
+
+        <!-- Statut -->
+        <div
+          class="text-xs font-semibold px-2 sm:px-3 py-1 rounded-full border shrink-0 text-center"
+          [ngClass]="{
+            'text-green-400 border-green-400': appt.status === 'Confirmé',
+            'text-orange-400 border-orange-400': appt.status === 'En attente',
+            'text-red-400 border-red-400': appt.status === 'Annulé',
+          }"
+        >
+          {{ appt.status }}
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Agenda du jour -->
+  <div class="flex justify-between items-center mb-3">
+    <span class="text-sm sm:text-base font-semibold text-gray-300"
+      >Agenda du jour</span
+    >
+    <a class="text-xs sm:text-sm text-blue-400 hover:underline" href="#"
+      >Vue complète →</a
+    >
+  </div>
+
+  <!-- Sur mobile : message + lien, le calendrier multi-colonnes n'est pas lisible -->
+  <div
+    class="block sm:hidden bg-white border border-neutral-800 rounded-xl p-5 text-center text-gray-400 text-sm"
+  >
+    <p class="mb-2">
+      L'agenda complet est optimisé pour les écrans plus larges.
+    </p>
+    <a class="text-blue-400 hover:underline text-sm" href="#"
+      >Voir la vue complète →</a
+    >
+  </div>
+
+  <div
+    class="hidden sm:block bg-white border border-neutral-800 rounded-xl overflow-hidden"
+  >
+    <full-calendar [options]="calendarOptions" />
+  </div>
+</div>

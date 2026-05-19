@@ -6,6 +6,7 @@ import { Dashboard } from './features/dashboard/dashboard';
 import { PublicLayout } from './shared/public-layout/public-layout';
 import { Settings } from './features/dashboard/settings/settings';
 import { Profile } from './features/dashboard/profile/profile';
+import { Home } from './features/dashboard/home/home';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,8 @@ export const routes: Routes = [
     path: 'dashboard',
     component: Dashboard,
     children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: Home },
       { path: 'settings', component: Settings },
       { path: 'profile', component: Profile },
     ],

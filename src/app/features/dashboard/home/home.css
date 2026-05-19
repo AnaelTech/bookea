@@ -1,0 +1,81 @@
+/* FullCalendar dark theme overrides — impossible à cibler avec Tailwind */
+:host ::ng-deep .fc {
+  background: transparent;
+  color: #d0d0d0;
+}
+
+:host ::ng-deep .fc-col-header-cell {
+  background: #1f1f1f;
+  border-color: #2e2e2e;
+  padding: 10px 0;
+}
+
+:host ::ng-deep .fc-col-header-cell-cushion {
+  color: #d0d0d0;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+:host ::ng-deep .fc-timegrid-slot {
+  border-color: #2e2e2e;
+  height: 80px;
+}
+
+:host ::ng-deep .fc-timegrid-slot-label-cushion {
+  color: #707070;
+  font-size: 0.8rem;
+}
+
+:host ::ng-deep .fc-scrollgrid,
+:host ::ng-deep .fc-scrollgrid-sync-table td,
+:host ::ng-deep .fc-scrollgrid-sync-table th,
+:host ::ng-deep .fc-timegrid-col {
+  border-color: #2e2e2e;
+}
+
+:host ::ng-deep .fc-now-indicator-line {
+  border-color: #f87171;
+}
+
+:host ::ng-deep .fc-now-indicator-arrow {
+  border-top-color: #f87171;
+  border-bottom-color: #f87171;
+}
+
+:host ::ng-deep .fc-timegrid-event,
+:host ::ng-deep .fc-event-main {
+  overflow: hidden !important;
+}
+
+:host ::ng-deep .fc-event-inner {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+:host ::ng-deep .fc-event-inner--compact {
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  flex-wrap: nowrap;
+}
+
+:host ::ng-deep .fc-event-inner strong {
+  display: block;
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:host ::ng-deep .fc-event-inner span {
+  font-size: 0.72rem;
+  opacity: 0.85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

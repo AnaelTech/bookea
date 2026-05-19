@@ -1,6 +1,47 @@
 <div class="flex h-screen">
-  <app-sidebar />
-  <main class="flex-1 overflow-auto">
-    <router-outlet />
-  </main>
+
+  <!-- Sidebar (desktop fixe + mobile drawer) -->
+  <app-sidebar
+    [mobileOpen]="mobileSidebarOpen()"
+    (closeMobile)="closeMobileSidebar()"
+  />
+
+  <!-- Overlay mobile : fond sombre cliquable pour fermer le drawer -->
+  @if (mobileSidebarOpen()) {
+    <div
+      class="sm:hidden fixed inset-0 z-30 bg-black/50 backdrop-blur-sm"
+      (click)="closeMobileSidebar()"
+      aria-hidden="true"
+    ></div>
+  }
+
+  <!-- Contenu principal -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+
+    <!-- Topbar mobile uniquement -->
+    <header class="sm:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-gray-100 shrink-0">
+      <button
+        (click)="openMobileSidebar()"
+        class="w-9 h-9 flex items-center justify-center rounded-lg text-gray-600 hover:bg-gray-100"
+        aria-label="Ouvrir le menu"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 6H21M3 12H21M3 18H21" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <a routerLink="/dashboard">
+        <img src="https://pagedone.io/asset/uploads/1701235273.png" alt="Logo" class="h-6" />
+      </a>
+
+      <!-- Placeholder pour centrer le logo -->
+      <div class="w-9"></div>
+    </header>
+
+    <!-- Zone scrollable -->
+    <main class="flex-1 overflow-auto">
+      <router-outlet />
+    </main>
+
+  </div>
 </div>
